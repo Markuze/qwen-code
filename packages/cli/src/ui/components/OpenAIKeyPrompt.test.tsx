@@ -17,7 +17,7 @@ describe('OpenAIKeyPrompt', () => {
       <OpenAIKeyPrompt onSubmit={onSubmit} onCancel={onCancel} />,
     );
 
-    expect(lastFrame()).toContain('OpenAI Configuration Required');
+    expect(lastFrame()).toContain('OpenAI Configuration');
     expect(lastFrame()).toContain('https://platform.openai.com/api-keys');
     expect(lastFrame()).toContain(
       'Press Enter to continue, Tab/↑↓ to navigate, Esc to cancel',
@@ -33,7 +33,7 @@ describe('OpenAIKeyPrompt', () => {
     );
 
     const output = lastFrame();
-    expect(output).toContain('OpenAI Configuration Required');
+    expect(output).toContain('OpenAI Configuration');
     expect(output).toContain('API Key:');
     expect(output).toContain('Base URL:');
     expect(output).toContain('Model:');

@@ -66,6 +66,8 @@ export interface CliArgs {
   openaiLogging: boolean | undefined;
   openaiApiKey: string | undefined;
   openaiBaseUrl: string | undefined;
+  ollama: boolean | undefined;
+  llmcpp: boolean | undefined;
   proxy: string | undefined;
   includeDirectories: string[] | undefined;
 }
@@ -214,6 +216,16 @@ export async function parseArguments(): Promise<CliArgs> {
       type: 'string',
       description: 'OpenAI base URL (for custom endpoints)',
     })
+    .option('ollama', {
+      type: 'boolean',
+      description:
+        'Use local Ollama server (sets OPENAI_BASE_URL to http://localhost:11434/v1)',
+    })
+    .option('llmcpp', {
+      type: 'boolean',
+      description:
+        'Use local llm.cpp server (sets OPENAI_BASE_URL to http://localhost:8080/v1)',
+    })
     .option('proxy', {
       type: 'string',
       description:
@@ -326,6 +338,14 @@ export async function loadCliConfig(
   // Handle OpenAI base URL from command line
   if (argv.openaiBaseUrl) {
     process.env.OPENAI_BASE_URL = argv.openaiBaseUrl;
+  }
+
+  if (argv.ollama) {
+    process.env.OPENAI_BASE_URL = 'http://localhost:11434/v1';
+  }
+
+  if (argv.llmcpp) {
+    process.env.OPENAI_BASE_URL = 'http://localhost:8080/v1';
   }
 
   // Set the context filename in the server's memoryTool module BEFORE loading memory

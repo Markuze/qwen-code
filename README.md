@@ -102,6 +102,9 @@ Qwen Code supports multiple API providers. You can configure your API key throug
    export OPENAI_MODEL="your_model_choice"
    ```
 
+   `OPENAI_API_KEY` is optional when connecting to local servers such as
+   Ollama or llm.cpp.
+
 2. **Project `.env` File**
    Create a `.env` file in your project root:
    ```env
@@ -109,6 +112,9 @@ Qwen Code supports multiple API providers. You can configure your API key throug
    OPENAI_BASE_URL=your_api_endpoint
    OPENAI_MODEL=your_model_choice
    ```
+
+   `OPENAI_API_KEY` may be omitted when using local servers like Ollama or
+   llm.cpp.
 
 #### API Provider Options
 
@@ -158,6 +164,26 @@ export OPENAI_MODEL="qwen3-coder-plus"
 export OPENAI_API_KEY="your_api_key_here"
 export OPENAI_BASE_URL="https://openrouter.ai/api/v1"
 export OPENAI_MODEL="qwen/qwen3-coder:free"
+```
+
+</details>
+
+<details>
+<summary><b>🖥️ Local On-Prem Servers</b></summary>
+
+No API key required. Ensure your server exposes an OpenAI-compatible API.
+
+```bash
+# Ollama
+qwen --ollama --model your_model
+
+# llama.cpp
+qwen --llmcpp --model your_model
+
+# or set the base URL manually
+export OPENAI_BASE_URL="http://localhost:11434/v1"  # Ollama
+export OPENAI_BASE_URL="http://localhost:8080/v1"   # llama.cpp
+export OPENAI_MODEL="your_model"
 ```
 
 </details>
