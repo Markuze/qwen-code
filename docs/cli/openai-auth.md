@@ -8,13 +8,13 @@ Qwen Code CLI supports OpenAI authentication for users who want to use OpenAI mo
 
 When you first run the CLI and select OpenAI as your authentication method, you'll be prompted to enter:
 
-- **API Key**: Your OpenAI API key from [https://platform.openai.com/api-keys](https://platform.openai.com/api-keys)
+- **API Key**: Your OpenAI API key from [https://platform.openai.com/api-keys](https://platform.openai.com/api-keys) (optional for local servers)
 - **Base URL**: The base URL for OpenAI API (defaults to `https://api.openai.com/v1`)
 - **Model**: The OpenAI model to use (defaults to `gpt-4o`)
 
 The CLI will guide you through each field:
 
-1. Enter your API key and press Enter
+1. Enter your API key (or leave blank for local servers) and press Enter
 2. Review/modify the base URL and press Enter
 3. Review/modify the model name and press Enter
 
@@ -63,6 +63,25 @@ You can use custom endpoints by setting the `OPENAI_BASE_URL` environment variab
 - Using Azure OpenAI
 - Using other OpenAI-compatible APIs
 - Using local OpenAI-compatible servers
+
+### Local Servers (Ollama or llm.cpp)
+
+No API key is required when connecting to local servers. You can either set the
+base URL manually:
+
+```bash
+# Ollama default
+export OPENAI_BASE_URL="http://localhost:11434/v1"
+# llama.cpp default
+export OPENAI_BASE_URL="http://localhost:8080/v1"
+```
+
+or use the built-in flags:
+
+```bash
+qwen --ollama --model your_model
+qwen --llmcpp --model your_model
+```
 
 ## Switching Authentication Methods
 

@@ -123,8 +123,8 @@ export function createContentGeneratorConfig(
     return contentGeneratorConfig;
   }
 
-  if (authType === AuthType.USE_OPENAI && openaiApiKey) {
-    contentGeneratorConfig.apiKey = openaiApiKey;
+  if (authType === AuthType.USE_OPENAI) {
+    contentGeneratorConfig.apiKey = openaiApiKey || '';
     contentGeneratorConfig.model =
       process.env.OPENAI_MODEL || DEFAULT_GEMINI_MODEL;
 
@@ -171,17 +171,17 @@ export async function createContentGenerator(
   }
 
   if (config.authType === AuthType.USE_OPENAI) {
-    if (!config.apiKey) {
-      throw new Error('OpenAI API key is required');
-    }
-
     // Import OpenAIContentGenerator dynamically to avoid circular dependencies
     const { OpenAIContentGenerator } = await import(
       './openaiContentGenerator.js'
     );
 
     // Always use OpenAIContentGenerator, logging is controlled by enableOpenAILogging flag
-    return new OpenAIContentGenerator(config.apiKey, config.model, gcConfig);
+    return new OpenAIContentGenerator(
+      config.apiKey || '',
+      config.model,
+      gcConfig,
+    );
   }
 
   throw new Error(

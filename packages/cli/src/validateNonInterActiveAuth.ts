@@ -18,7 +18,7 @@ function getAuthTypeFromEnv(): AuthType | undefined {
   if (process.env.GEMINI_API_KEY) {
     return AuthType.USE_GEMINI;
   }
-  if (process.env.OPENAI_API_KEY) {
+  if (process.env.OPENAI_API_KEY || process.env.OPENAI_BASE_URL) {
     return AuthType.USE_OPENAI;
   }
   return undefined;

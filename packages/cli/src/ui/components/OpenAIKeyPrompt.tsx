@@ -63,13 +63,7 @@ export function OpenAIKeyPrompt({
         setCurrentField('model');
         return;
       } else if (currentField === 'model') {
-        // 只有在提交时才检查 API key 是否为空
-        if (apiKey.trim()) {
-          onSubmit(apiKey.trim(), baseUrl.trim(), model.trim());
-        } else {
-          // 如果 API key 为空，回到 API key 字段
-          setCurrentField('apiKey');
-        }
+        onSubmit(apiKey.trim(), baseUrl.trim(), model.trim());
       }
       return;
     }
@@ -131,12 +125,11 @@ export function OpenAIKeyPrompt({
       padding={1}
       width="100%"
     >
-      <Text bold color={Colors.AccentBlue}>
-        OpenAI Configuration Required
-      </Text>
+      <Text bold color={Colors.AccentBlue}>OpenAI Configuration</Text>
       <Box marginTop={1}>
         <Text>
-          Please enter your OpenAI configuration. You can get an API key from{' '}
+          Please enter your OpenAI configuration. API key is optional for local
+          servers like Ollama or llm.cpp. You can get an API key from{' '}
           <Text color={Colors.AccentBlue}>
             https://platform.openai.com/api-keys
           </Text>
